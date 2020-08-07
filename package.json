@@ -1,0 +1,29 @@
+{
+  "name": "@koalati/tool-seo",
+  "version": "1.0.0",
+  "description": "Koalati tool that checks for on-site SEO of a page and that provides suggestions for improvement.",
+  "main": "tool.js",
+  "scripts": {
+    "test": "npx @koalati/dev-tool-tester --url=\"https://koalati.com/\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koalatiapp/tool-seo.git"
+  },
+  "keywords": [
+    "koalati"
+  ],
+  "author": {
+    "name": "Koalati",
+    "email": "info@koalati.com",
+    "url": "https://koalati.com"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/koalatiapp/tool-seo/issues"
+  },
+  "homepage": "https://github.com/koalatiapp/tool-seo#readme",
+  "devDependencies": {
+    "@koalati/dev-tool-tester": "^1.0.5"
+  }
+}
