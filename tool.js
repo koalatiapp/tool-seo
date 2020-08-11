@@ -1,9 +1,5 @@
 'use strict';
 
-const retext = require('retext')
-const pos = require('retext-pos')
-const keywords = require('retext-keywords')
-const nlcstToString = require('nlcst-to-string')
 const sslCertificate = require('get-ssl-certificate')
 const SCORE_DEDUCTION_CRUCIAL = 1;
 const SCORE_DEDUCTION_MAJOR = .5;
@@ -18,14 +14,11 @@ class Tool {
 
     async run() {
         await this._extractData();
-        await this._extractContent();
-        await this._extractKeywords();
 
         this.checkMetaTitle();
         this.checkMetaDescription();
         this.checkH1s();
         this.checkH2s();
-        this.checkKeywords();
         this.checkInlineStyles();
         this.checkAltlessImages();
         this.checkDeprecatedTags();
@@ -35,13 +28,11 @@ class Tool {
 
     get results() {
         return this._results;
-    };
+    }
 
     async cleanup() {
-        // cleans up the variables and connections
-        // this will be called once your tool has been executed and its results have been collected
-        // your goal here is to put everything back the way it was before your tool was initialized
-    };
+
+    }
 
     checkMetaTitle() {
         const recommendations = [];
@@ -113,7 +104,7 @@ class Tool {
     }
 
     checkH2s() {
-        const charactersPerHeading = (this._contentText.length / (this._data.h2s.length + this._data.h3s.length + 1));
+        const charactersPerHeading = (this._data.contentText.length / (this._data.h2s.length + this._data.h3s.length + 1));
         const hasEnoughHeadings = charactersPerHeading <= 1000;
 
         this._results.push({
@@ -125,23 +116,6 @@ class Tool {
             'snippets': this._data.h2s,
             'recommendations': !hasEnoughHeadings ? "Consider adding H2 headings to your page." : ''
         });
-    }
-
-    checkKeywords() {
-        const recommendations = [];
-        let score = 1;
-
-        /*
-        this._results.push({
-            'uniqueName': 'keywords',
-            'title': 'Keywords',
-            'description': 'Checks the main keywords for your page. Every page should focus on a few keywords,',
-            'weight': .05,
-            'score': 1,
-            'snippets': this._keywords,
-            'recommendations': ''
-        });
-        */
     }
 
     checkInlineStyles() {
@@ -266,50 +240,6 @@ class Tool {
         });
     }
 
-    async _extractKeywords() {
-        this._keywords = await new Promise((resolve, reject) => {
-            retext()
-                .use(pos)
-                .use(keywords, { maximum: 6 })
-                .process(this._contentText.toLowerCase(), (err, file) => {
-                    if (err) {
-                        reject(err);
-                    }
-
-                    const keywords = [];
-                    file.data.keyphrases.forEach(function(phraseObj) {
-                        const keyword = phraseObj.matches[0].nodes.map(nlcstToString).join('');
-                        if (keywords.indexOf(keyword) == -1 && keyword.indexOf('\n') == -1) {
-                            keywords.push(keyword.replace("2'2", "'"));
-                        }
-                    });
-
-                    resolve(keywords);
-                });
-        });
-    }
-
-    async _extractContent() {
-        const contentStrings = await this.page.evaluate(() => {
-            const pageNode = document.body.cloneNode(true);
-            for (const unwantedNode of pageNode.querySelectorAll('script, style, noscript')) {
-                unwantedNode.remove();
-            }
-            for (const brNode of pageNode.querySelectorAll('br')) {
-                brNode.outerHTML = " ";
-            }
-            const htmlString = pageNode.innerText || '';
-            const stripedHtml = htmlString.replace(/<[^>]+>/g, '');
-            const strings = stripedHtml.replace(/\s{3,}/g, "\n\n\n").split("\n\n\n");
-
-            return strings.filter(function(str) {
-                return str != '' && str.split(' ').length > 2;
-            });
-        });
-
-        this._contentText = contentStrings.join('\n');
-    }
-
     async _extractData() {
         this._data = await this.page.evaluate(() => {
             const getOpeningTag = (node) => { return node.outerHTML.replace(node.innerHTML, '').replace(/<\/[a-zA-Z]+>$/, '') };
@@ -323,6 +253,7 @@ class Tool {
                 description: descriptionNode ? descriptionNode.getAttribute('content').trim() : '',
                 robots: robotsMetaNode ? robotsMetaNode.getAttribute('content').trim() : '',
                 documentLength: document.documentElement.outerHTML.length,
+                contentText: document.body.innerText,
                 h1s: [...document.querySelectorAll('h1')].map(node => node.innerText.replace('\n', ' ').trim()),
                 h2s: [...document.querySelectorAll('h2')].map(node => node.innerText.replace('\n', ' ').trim()),
                 h3s: [...document.querySelectorAll('h3')].map(node => node.innerText.replace('\n', ' ').trim()),

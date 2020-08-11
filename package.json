@@ -24,12 +24,9 @@
   },
   "homepage": "https://github.com/koalatiapp/tool-seo#readme",
   "devDependencies": {
-    "@koalati/dev-tool-tester": "^1.0.5"
+    "@koalati/dev-tool-tester": "^1.0.6"
   },
   "dependencies": {
-    "get-ssl-certificate": "^2.3.3",
-    "retext": "^7.0.1",
-    "retext-keywords": "^6.0.0",
-    "retext-pos": "^3.0.0"
+    "get-ssl-certificate": "^2.3.3"
   }
 }
