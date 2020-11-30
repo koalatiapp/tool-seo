@@ -129,7 +129,7 @@ class Tool {
             'weight': .1,
             'score': 1 - (tooMuchInlineStyles ? SCORE_DEDUCTION_CRUCIAL : 0),
             'snippets': this._data.inlineStyleNodes.map(result => result.openingTag),
-            'recommendations': tooMuchInlineStyles ? `Move inline styles to CSS files to reduce your page's size by ${Math.round(lengthPercentage, 2)}%.` : ''
+            'recommendations': tooMuchInlineStyles ? `Move inline styles to CSS files to reduce your page's size by ${Math.round(lengthPercentage * 100, 2) / 100}%.` : ''
         });
     }
 
