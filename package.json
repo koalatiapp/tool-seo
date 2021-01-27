@@ -27,6 +27,7 @@
     "@koalati/dev-tool-tester": "^1.0.6"
   },
   "dependencies": {
-    "get-ssl-certificate": "^2.3.3"
+    "get-ssl-certificate": "^2.3.3",
+    "result-builder": "^1.1.2"
   }
 }
