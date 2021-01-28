@@ -101,6 +101,8 @@
 		"score": 0,
 		"snippets": [],
 		"table": [],
-		"recommendations": "Set up an SSL certificate for your website and update your pages to use the https protocol."
+		"recommendations": [
+			"Set up an SSL certificate for your website and update your pages to use the https protocol."
+		]
 	}
 ]

@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "get-ssl-certificate": "^2.3.3",
-    "result-builder": "^1.1.2"
+    "result-builder": "^1.1.3"
   }
 }

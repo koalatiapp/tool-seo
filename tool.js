@@ -96,8 +96,11 @@ class Tool {
 			.setDescription("Checks your page for H2 headings. Pages should include H2 heading tags that explain what the different sections of a page are about.")
 			.setWeight(.05)
 			.setScore(1 - (!hasEnoughHeadings ? SCORE_DEDUCTION_CRUCIAL : 0))
-			.addSnippets(this._data.h2s)
-			.addRecommendation(!hasEnoughHeadings ? "Consider adding H2 headings to your page." : "");
+			.addSnippets(this._data.h2s);
+
+		if (!hasEnoughHeadings) {
+			result.addRecommendation("Consider adding H2 headings to your page.");
+		}
 	}
 
 	checkInlineStyles() {
@@ -109,9 +112,11 @@ class Tool {
 			.setDescription("Checks your page for inline styles. Inline styles should be kept to a minimum, as they slow down the loading speed of your page and make your site more difficult to maintain over time.")
 			.setWeight(.1)
 			.setScore(1 - (tooMuchInlineStyles ? SCORE_DEDUCTION_CRUCIAL : 0))
-			.addSnippets(this._data.inlineStyleNodes.map(result => result.openingTag))
-			.addRecommendation(tooMuchInlineStyles ? `Move inline styles to CSS files to reduce your page's size by ${Math.round(lengthPercentage * 100, 2) / 100}%.` : ""
-			);
+			.addSnippets(this._data.inlineStyleNodes.map(result => result.openingTag));
+
+		if (tooMuchInlineStyles) {
+			result.addRecommendation(`Move inline styles to CSS files to reduce your page's size by ${Math.round(lengthPercentage * 100, 2) / 100}%.`);
+		}
 	}
 
 	checkAltlessImages() {
@@ -120,8 +125,11 @@ class Tool {
 			.setDescription("Checks your page for images without an alt attribute. The alt attribute on `<img>` tags allows you to describe the contents of the image, which improves accessibility and improves your SEO for image search engines like Google Search.")
 			.setWeight(.1)
 			.setScore(1 - (this._data.deprecatedTags.length > 1 ? SCORE_DEDUCTION_CRUCIAL : 0))
-			.addSnippets(this._data.altlessImgs)
-			.addRecommendation(this._data.altlessImgs.length ? "Add an alt attribute to all of your <img> tags to describe their contents." : "");
+			.addSnippets(this._data.altlessImgs);
+
+		if (this._data.altlessImgs.length) {
+			result.addRecommendation("Add an alt attribute to all of your <img> tags to describe their contents.");
+		}
 	}
 
 	checkDeprecatedTags() {
@@ -130,8 +138,11 @@ class Tool {
 			.setDescription("Checks your page for deprecated HTML tags. There are tags that are not valid anymore, and that may be displayed incorrectly by modern browsers.")
 			.setWeight(.05)
 			.setScore(1 - (this._data.deprecatedTags.length > 1 ? SCORE_DEDUCTION_CRUCIAL : 0))
-			.addSnippets(this._data.deprecatedTags)
-			.addRecommendation(this._data.deprecatedTags.length ? "Remove or replace the deprecated HTML tags on your page." : "");
+			.addSnippets(this._data.deprecatedTags);
+
+		if (this._data.deprecatedTags.length) {
+			result.addRecommendation("Remove or replace the deprecated HTML tags on your page.");
+		}
 	}
 
 	checkSeoFriendlyUrl() {
@@ -207,8 +218,11 @@ class Tool {
 			.setDescription("Checks if your URL uses the https protocol with a valid SSL certificate. This is important for security, SEO and user trust.")
 			.setWeight(.1)
 			.setScore(hasSslCertificate ? 1 : 0)
-			.addSnippets(hasSslCertificate ? [`Your website has a valid SSL certificate provided by ${certificateIssuer}. It is valid until ${certificateExpirationDate}.`] : [])
-			.addRecommendation(!hasSslCertificate ? "Set up an SSL certificate for your website and update your pages to use the https protocol." : "");
+			.addSnippets(hasSslCertificate ? [`Your website has a valid SSL certificate provided by ${certificateIssuer}. It is valid until ${certificateExpirationDate}.`] : []);
+
+		if (!hasSslCertificate) {
+			result.addRecommendation("Set up an SSL certificate for your website and update your pages to use the https protocol.");
+		}
 	}
 
 	async _extractData() {
