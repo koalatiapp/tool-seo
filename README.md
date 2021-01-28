@@ -1,7 +1,7 @@
 # On-page SEO Tool for Koalati
-![npm (scoped)](https://img.shields.io/npm/v/@koalati/tool-seo)
-![Libraries.io dependency status for latest release, scoped npm package](https://img.shields.io/librariesio/release/npm/@koalati/tool-seo)
-![NPM](https://img.shields.io/npm/l/@koalati/tool-seo)
+[![npm (scoped)](https://img.shields.io/npm/v/@koalati/tool-seo)](https://www.npmjs.com/package/@koalati/tool-seo)
+[![Libraries.io dependency status for latest release, scoped npm package](https://img.shields.io/librariesio/release/npm/@koalati/tool-seo)](https://www.npmjs.com/package/@koalati/tool-seo)
+[![GitHub CI Workflow status](https://github.com/koalatiapp/tool-seo/workflows/ci/badge.svg)](https://github.com/koalatiapp/tool-seo/actions)
 
 This is the repository for Koalati's built-in on-page SEO tool. This tool's goal is to analyze a page's meta tags, contents and URL to help optimize and improve its reach on search engines like Google.
 
