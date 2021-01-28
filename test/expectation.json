@@ -84,14 +84,10 @@
 		"title": "SEO friendly URL",
 		"description": "Checks your URL to see if it's SEO and user friendly. Good URLs are concise, descriptive and easy to read. Bad URLs are long and often composed of IDs and numbers that don't mean anything to users and search engines.",
 		"weight": 0.1,
-		"score": 0.5,
+		"score": 1,
 		"snippets": [],
 		"table": [],
-		"recommendations": [
-			"Consider updating your page's URL to be 50-60 characters long.",
-			"Reduce the amount of \"folders\" in your page's URL. Use at most 2 folders in your URLs for improved readability.",
-			"Replace uppercase characters in your page's URL by lowercase ones."
-		]
+		"recommendations": []
 	},
 	{
 		"uniqueName": "ssl-certificate",

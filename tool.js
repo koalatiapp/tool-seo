@@ -133,8 +133,8 @@ class Tool {
 	}
 
 	checkDeprecatedTags() {
-		const result = this.builder.newTest("deprecated-tags");
-		result.setTitle("Deprecated tags")
+		const result = this.builder.newTest("deprecated-tags")
+			.setTitle("Deprecated tags")
 			.setDescription("Checks your page for deprecated HTML tags. There are tags that are not valid anymore, and that may be displayed incorrectly by modern browsers.")
 			.setWeight(.05)
 			.setScore(1 - (this._data.deprecatedTags.length > 1 ? SCORE_DEDUCTION_CRUCIAL : 0))
@@ -149,12 +149,16 @@ class Tool {
 		let score = 1;
 		const pageUrl = this.page.url();
 		const pathParts = this._data.urlPath.split("/");
-
-		//Build result by result-builder
-		const result = this.builder.newTest("seo-friendly-url");
-		result.setTitle("SEO friendly URL")
+		const result = this.builder.newTest("seo-friendly-url")
+			.setTitle("SEO friendly URL")
 			.setDescription("Checks your URL to see if it's SEO and user friendly. Good URLs are concise, descriptive and easy to read. Bad URLs are long and often composed of IDs and numbers that don't mean anything to users and search engines.")
 			.setWeight(.1);
+
+		if (pageUrl.indexOf("file:") === 0) {
+			result.setScore(1);
+			return;
+		}
+
 		// Unsafe characters
 		if (this._data.urlPath.replace(/['"<>#%{}|\\^~[]`]/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "") != this._data.urlPath) {
 			score -= SCORE_DEDUCTION_CRUCIAL;
