@@ -26,6 +26,7 @@
   "homepage": "https://github.com/koalatiapp/tool-seo#readme",
   "devDependencies": {
     "@koalati/dev-tool-tester": "^2.0.0",
+    "eslint": "^7.18.0",
     "mocha": "^8.2.1"
   },
   "dependencies": {
