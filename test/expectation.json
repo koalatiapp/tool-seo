@@ -8,6 +8,7 @@
 		"snippets": [
 			"test page"
 		],
+		"table": [],
 		"recommendations": []
 	},
 	{
@@ -19,6 +20,7 @@
 		"snippets": [
 			""
 		],
+		"table": [],
 		"recommendations": [
 			"Add a meta description to your page."
 		]
@@ -32,6 +34,7 @@
 		"snippets": [
 			"Our company is amazing"
 		],
+		"table": [],
 		"recommendations": []
 	},
 	{
@@ -43,7 +46,8 @@
 		"snippets": [
 			"Our products"
 		],
-		"recommendations": ""
+		"table": [],
+		"recommendations": []
 	},
 	{
 		"uniqueName": "inline-css",
@@ -52,7 +56,8 @@
 		"weight": 0.1,
 		"score": 1,
 		"snippets": [],
-		"recommendations": ""
+		"table": [],
+		"recommendations": []
 	},
 	{
 		"uniqueName": "altless-imgs",
@@ -61,7 +66,8 @@
 		"weight": 0.1,
 		"score": 1,
 		"snippets": [],
-		"recommendations": ""
+		"table": [],
+		"recommendations": []
 	},
 	{
 		"uniqueName": "deprecated-tags",
@@ -70,7 +76,8 @@
 		"weight": 0.05,
 		"score": 1,
 		"snippets": [],
-		"recommendations": ""
+		"table": [],
+		"recommendations": []
 	},
 	{
 		"uniqueName": "seo-friendly-url",
@@ -78,6 +85,8 @@
 		"description": "Checks your URL to see if it's SEO and user friendly. Good URLs are concise, descriptive and easy to read. Bad URLs are long and often composed of IDs and numbers that don't mean anything to users and search engines.",
 		"weight": 0.1,
 		"score": 0.5,
+		"snippets": [],
+		"table": [],
 		"recommendations": [
 			"Consider updating your page's URL to be 50-60 characters long.",
 			"Reduce the amount of \"folders\" in your page's URL. Use at most 2 folders in your URLs for improved readability.",
@@ -91,6 +100,9 @@
 		"weight": 0.1,
 		"score": 0,
 		"snippets": [],
-		"recommendations": "Set up an SSL certificate for your website and update your pages to use the https protocol."
+		"table": [],
+		"recommendations": [
+			"Set up an SSL certificate for your website and update your pages to use the https protocol."
+		]
 	}
 ]

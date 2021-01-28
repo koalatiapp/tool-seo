@@ -1,6 +1,6 @@
 {
   "name": "@koalati/tool-seo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Koalati tool that checks for on-site SEO of a page and that provides suggestions for improvement.",
   "main": "tool.js",
   "scripts": {
@@ -30,6 +30,7 @@
     "mocha": "^8.2.1"
   },
   "dependencies": {
-    "get-ssl-certificate": "^2.3.3"
+    "get-ssl-certificate": "^2.3.3",
+    "result-builder": "^1.1.3"
   }
 }
