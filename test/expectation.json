@@ -1,0 +1,96 @@
+[
+	{
+		"uniqueName": "meta-title",
+		"title": "Page title",
+		"description": "Checks your page's title. A good page title should describe your page's content accurately and be under 60 characters long.",
+		"weight": 0.2,
+		"score": 1,
+		"snippets": [
+			"test page"
+		],
+		"recommendations": []
+	},
+	{
+		"uniqueName": "meta-description",
+		"title": "Meta description",
+		"description": "Checks your page's meta description. Your page description is displayed in search results, so it should be written to convince people to click your link.",
+		"weight": 0.2,
+		"score": 0,
+		"snippets": [
+			""
+		],
+		"recommendations": [
+			"Add a meta description to your page."
+		]
+	},
+	{
+		"uniqueName": "h1-heading",
+		"title": "H1 headings",
+		"description": "Checks your page for H1 headings. Every page should include a single H1 heading tag that explains what the page is about.",
+		"weight": 0.1,
+		"score": 1,
+		"snippets": [
+			"Our company is amazing"
+		],
+		"recommendations": []
+	},
+	{
+		"uniqueName": "h2-heading",
+		"title": "H2 headings",
+		"description": "Checks your page for H2 headings. Pages should include H2 heading tags that explain what the different sections of a page are about.",
+		"weight": 0.05,
+		"score": 1,
+		"snippets": [
+			"Our products"
+		],
+		"recommendations": ""
+	},
+	{
+		"uniqueName": "inline-css",
+		"title": "Inline styles",
+		"description": "Checks your page for inline styles. Inline styles should be kept to a minimum, as they slow down the loading speed of your page and make your site more difficult to maintain over time.",
+		"weight": 0.1,
+		"score": 1,
+		"snippets": [],
+		"recommendations": ""
+	},
+	{
+		"uniqueName": "altless-imgs",
+		"title": "Alt text for images",
+		"description": "Checks your page for images without an alt attribute. The alt attribute on `<img>` tags allows you to describe the contents of the image, which improves accessibility and improves your SEO for image search engines like Google Search.",
+		"weight": 0.1,
+		"score": 1,
+		"snippets": [],
+		"recommendations": ""
+	},
+	{
+		"uniqueName": "deprecated-tags",
+		"title": "Deprecated tags",
+		"description": "Checks your page for deprecated HTML tags. There are tags that are not valid anymore, and that may be displayed incorrectly by modern browsers.",
+		"weight": 0.05,
+		"score": 1,
+		"snippets": [],
+		"recommendations": ""
+	},
+	{
+		"uniqueName": "seo-friendly-url",
+		"title": "SEO friendly URL",
+		"description": "Checks your URL to see if it's SEO and user friendly. Good URLs are concise, descriptive and easy to read. Bad URLs are long and often composed of IDs and numbers that don't mean anything to users and search engines.",
+		"weight": 0.1,
+		"score": 0.5,
+		"recommendations": [
+			"Consider updating your page's URL to be 50-60 characters long.",
+			"Reduce the amount of \"folders\" in your page's URL. Use at most 2 folders in your URLs for improved readability.",
+			"Replace uppercase characters in your page's URL by lowercase ones."
+		]
+	},
+	{
+		"uniqueName": "ssl-certificate",
+		"title": "SSL certificate",
+		"description": "Checks if your URL uses the https protocol with a valid SSL certificate. This is important for security, SEO and user trust.",
+		"weight": 0.1,
+		"score": 0,
+		"snippets": [],
+		"recommendations": "Set up an SSL certificate for your website and update your pages to use the https protocol."
+	}
+]

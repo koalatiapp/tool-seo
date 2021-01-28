@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>test page</title>
+        <style>
+            html, body { padding: 0; margin: 0; font-family: sans-serif; background-color: #f1f1f1; }
+            * { -webkit-font-smoothing: antialised; }
+            a {text-decoration: none;color: #000;}
+            header { display: flex; padding: 15px; justify-content: space-between; align-items: center; background: white; }
+            header > a { font-size: 24px; font-weight: 800; }
+            nav a { margin-left: 30px; }
+            .button { display: inline-block; padding: 8px 14px; color: white; background-color: #3f51b5; }
+            section { width: 1280px; max-width: 100%; padding: 45px; margin: 60px auto; background-color: white; }
+            .products-wrapper { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 30px; }
+            .product { display: block; padding: 30px; }
+            .product img { width: 100%; }
+            footer { padding: 10px; font-size: 12px; text-align: center; color: white; background-color: #222; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <a href="#">Brand name</a>
+            <nav>
+                <a href="#">About us</a>
+                <a href="#">Products</a>
+                <a href="#">Pricing</a>
+                <a href="#">Contact us</a>
+                <a href="#" class="button">Sign up</a>
+            </nav>
+        </header>
+
+        <section>
+            <main>
+                <h1>Our company is amazing</h1>
+                <p>Welcome to our company's website. On here, you will find all of the latest and coolest tech gadgets the 1980s brought to us.</p>
+                <p>Look around, see if you find anything of interest, and make sure to contact us if you do!</p>
+                <a href="#" class="button">Shop now</a>
+            </main>
+        </section>
+
+        <section>
+            <h2>Our products</h2>
+
+            <div class="products-wrapper">
+                <a href="#" class="product">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" alt="Placeholder for the NES">
+                    <h3>Nintendo Entertainment System</h3>
+                    <p>An iconic Japanese import: the wonderful NES.</p>
+                    <span class="button">Buy now</span>
+                </a>
+                <a href="#" class="product">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" alt="Placeholder for the Walkman">
+                    <h3>Sony Walkman</h3>
+                    <p>Do you like music? If so, this is the product for you!</p>
+                    <span class="button">Buy now</span>
+                </a>
+                <a href="#" class="product">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" alt="Placeholder for the Game Boy">
+                    <h3>Nintendo Game Boy</h3>
+                    <p>A portable game machine from Nintendo, which came by around 1989.</p>
+                    <span class="button">Buy now</span>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            © Fictional Test 2020
+        </footer>
+    </body>
+</html>
