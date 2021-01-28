@@ -9,20 +9,20 @@ jobs:
         name: Coding standards
         runs-on: ubuntu-latest
         steps:
-			- uses: actions/checkout@v2
-			- uses: actions/setup-node@v2
-			 with:
-				node-version: '12'
-			- run: npm install
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                    node-version: '12'
+            - run: npm install
             - run: node_modules/eslint/bin/eslint.js .
 
     tests:
         name: Unit and functional tests
         runs-on: ubuntu-latest
         steps:
-			- uses: actions/checkout@v2
-			- uses: actions/setup-node@v2
-			 with:
-				node-version: '12'
-			- run: npm install
-			- run: npm test
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                    node-version: '12'
+            - run: npm install
+            - run: npm test
