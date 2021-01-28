@@ -30,6 +30,7 @@
     "mocha": "^8.2.1"
   },
   "dependencies": {
-    "get-ssl-certificate": "^2.3.3"
+    "get-ssl-certificate": "^2.3.3",
+    "result-builder": "^1.1.2"
   }
 }
