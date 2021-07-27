@@ -44,7 +44,7 @@ class Tool {
 
 		if (this._data.title.length < 1) {
 			score -= SCORE_DEDUCTION_CRUCIAL;
-			result.addRecommendation("Add a title tag to your page. A good page title should be consise (about 60 characters long), and describe your page's content accurately.");
+			result.addRecommendation("Add a title tag to your page.");
 		} else if (this._data.title.length > 65) {
 			score -= SCORE_DEDUCTION_MINOR;
 			result.addRecommendation("Update your page title to contain 60 characters or less.");
