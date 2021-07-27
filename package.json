@@ -1,6 +1,6 @@
 {
   "name": "@koalati/tool-seo",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Koalati tool that checks for on-site SEO of a page and that provides suggestions for improvement.",
   "main": "tool.js",
   "scripts": {
