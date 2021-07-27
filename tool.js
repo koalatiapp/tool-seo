@@ -104,14 +104,16 @@ class Tool {
 	}
 
 	checkInlineStyles() {
-		const lengthPercentage = this._data.inlineStyleNodes.reduce((stylesLength, result) => stylesLength + result.styles.length + 10, 0) / this._data.documentLength;
-		const tooMuchInlineStyles = lengthPercentage > .01;
+		const length = this._data.inlineStyleNodes.reduce((stylesLength, result) => stylesLength + result.styles.length + 10, 0);
+		const lengthPercentage = length / this._data.documentLength;
+		const tooMuchInlineStyles = lengthPercentage > .1 || length >= 1000;
+		const scoreDeduction = length >= 1000 ? SCORE_DEDUCTION_CRUCIAL : SCORE_DEDUCTION_MINOR;
 
 		const result = this.builder.newTest("inline-css");
 		result.setTitle("Inline styles")
 			.setDescription("Checks your page for inline styles. Inline styles should be kept to a minimum, as they slow down the loading speed of your page and make your site more difficult to maintain over time.")
 			.setWeight(.1)
-			.setScore(1 - (tooMuchInlineStyles ? SCORE_DEDUCTION_CRUCIAL : 0))
+			.setScore(1 - (tooMuchInlineStyles ? scoreDeduction : 0))
 			.addSnippets(this._data.inlineStyleNodes.map(result => result.openingTag));
 
 		if (tooMuchInlineStyles) {
