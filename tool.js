@@ -133,7 +133,7 @@ class Tool {
 			.addSnippets(this._data.altlessImgs);
 
 		if (this._data.altlessImgs.length) {
-			result.addRecommendation("Add an alt attribute to all of your <img> tags to describe their contents.");
+			result.addRecommendation("Add an alt attribute to all of your `<img>` tags to describe their contents.");
 		}
 	}
 
