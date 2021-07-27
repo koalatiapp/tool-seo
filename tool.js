@@ -250,7 +250,7 @@ class Tool {
 				h3s: [...document.querySelectorAll("h3")].map(node => node.innerText.replace("\n", " ").trim()),
 				inlineStyleNodes: [...document.querySelectorAll("[style]:not([style=\"\"])")].map(node => { return { styles: node.getAttribute("style"), openingTag: getOpeningTag(node) }; }),
 				deprecatedTags: [...document.querySelectorAll("acronym, applet, basefont, big, center, dir, font, frame, frameset, isindex, noframes, s, strike, tt, u")].map(getOpeningTag),
-				altlessImgs: [...document.querySelectorAll("img:not([alt]), img[alt=\"\"]")].map(getOpeningTag),
+				altlessImgs: [...document.querySelectorAll("img:not([alt]), img[alt]:not([alt=\"\"])")].map(getOpeningTag),
 				urlPath: decodeURI(window.location.pathname.replace(/^\//, "")),
 				urlQuery: window.location.search,
 				urlHostname: window.location.hostname,
