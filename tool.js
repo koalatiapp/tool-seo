@@ -1,6 +1,6 @@
 "use strict";
 
-const ResultBuilder = require("result-builder");
+const ResultBuilder = require("@koalati/result-builder");
 const sslCertificate = require("get-ssl-certificate");
 const SCORE_DEDUCTION_CRUCIAL = 1;
 const SCORE_DEDUCTION_MINOR = .25;
@@ -117,7 +117,10 @@ class Tool {
 			.addSnippets(this._data.inlineStyleNodes.map(result => result.openingTag));
 
 		if (tooMuchInlineStyles) {
-			result.addRecommendation(`Move inline styles to CSS files to reduce your page's size by ${Math.round(lengthPercentage * 100, 2) / 100}%.`);
+			result.addRecommendation(
+				"Move inline styles to CSS files to reduce your page's size by %percentage%%.",
+				{ "%percentage%": Math.round(lengthPercentage * 100, 2) / 100 }
+			);
 		}
 	}
 
@@ -250,7 +253,7 @@ class Tool {
 				h3s: [...document.querySelectorAll("h3")].map(node => node.innerText.replace("\n", " ").trim()),
 				inlineStyleNodes: [...document.querySelectorAll("[style]:not([style=\"\"])")].map(node => { return { styles: node.getAttribute("style"), openingTag: getOpeningTag(node) }; }),
 				deprecatedTags: [...document.querySelectorAll("acronym, applet, basefont, big, center, dir, font, frame, frameset, isindex, noframes, s, strike, tt, u")].map(getOpeningTag),
-				altlessImgs: [...document.querySelectorAll("img:not([alt]), img[alt]:not([alt=\"\"])")].map(getOpeningTag),
+				altlessImgs: [...document.querySelectorAll("img:not([alt])")].map(getOpeningTag),
 				urlPath: decodeURI(window.location.pathname.replace(/^\//, "")),
 				urlQuery: window.location.search,
 				urlHostname: window.location.hostname,
