@@ -22,7 +22,7 @@
 		],
 		"table": [],
 		"recommendations": [
-			["Add a meta description to your page.", {}]
+			["Add a meta description to your page.", {}, "ESSENTIAL"]
 		]
 	},
 	{
@@ -98,7 +98,7 @@
 		"snippets": [],
 		"table": [],
 		"recommendations": [
-			["Set up an SSL certificate for your website and update your pages to use the https protocol.", {}]
+			["Set up an SSL certificate for your website and update your pages to use the `https` protocol.", {}, "ISSUE"]
 		]
 	}
 ]

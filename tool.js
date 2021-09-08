@@ -1,6 +1,6 @@
 "use strict";
 
-const ResultBuilder = require("@koalati/result-builder");
+const { ResultBuilder, priorities } = require("@koalati/result-builder");
 const sslCertificate = require("get-ssl-certificate");
 const SCORE_DEDUCTION_CRUCIAL = 1;
 const SCORE_DEDUCTION_MINOR = .25;
@@ -9,6 +9,8 @@ const SCORE_DEDUCTION_CONSIDER = 0;
 class Tool {
 	constructor({ page }) {
 		this.page = page;
+
+		/** @type {ResultBuilder} */
 		this.builder = new ResultBuilder();
 	}
 
@@ -44,10 +46,10 @@ class Tool {
 
 		if (this._data.title.length < 1) {
 			score -= SCORE_DEDUCTION_CRUCIAL;
-			result.addRecommendation("Add a title tag to your page.");
+			result.addRecommendation("Add a title tag to your page.", {}, priorities.ISSUE);
 		} else if (this._data.title.length > 65) {
 			score -= SCORE_DEDUCTION_MINOR;
-			result.addRecommendation("Update your page title to contain 60 characters or less.");
+			result.addRecommendation("Update your page title to contain 60 characters or less.", {}, priorities.OPTIMIZATION);
 		}
 		result.setScore(score);
 	}
@@ -61,10 +63,10 @@ class Tool {
 			.addSnippet(this._data.description);
 		if (this._data.description.length < 1) {
 			score -= SCORE_DEDUCTION_CRUCIAL;
-			result.addRecommendation("Add a meta description to your page.");
+			result.addRecommendation("Add a meta description to your page.", {}, priorities.ESSENTIAL);
 		} else if (this._data.description.length > 160) {
 			score -= SCORE_DEDUCTION_MINOR;
-			result.addRecommendation("Update your meta description to contain between 50 and 160 characters.");
+			result.addRecommendation("Update your meta description to contain between 50 and 160 characters.", {}, priorities.OPTIMIZATION);
 		}
 		result.setScore(score);
 
@@ -79,10 +81,10 @@ class Tool {
 			.addSnippets(this._data.h1s);
 		if (this._data.h1s.length < 1) {
 			score -= SCORE_DEDUCTION_CRUCIAL;
-			result.addRecommendation("Add an H1 heading to your page");
+			result.addRecommendation("Add an H1 heading to your page", {}, priorities.ISSUE);
 		} else if (this._data.h1s.length > 1) {
 			score -= SCORE_DEDUCTION_MINOR;
-			result.addRecommendation("Remove extra H1 headings so your page only contains one.");
+			result.addRecommendation("Remove extra H1 headings so your page only contains one.", {}, priorities.ISSUE);
 		}
 		result.setScore(score);
 	}
@@ -99,7 +101,7 @@ class Tool {
 			.addSnippets(this._data.h2s);
 
 		if (!hasEnoughHeadings) {
-			result.addRecommendation("Consider adding H2 headings to your page.");
+			result.addRecommendation("Consider adding H2 headings to your page.", {}, priorities.OPTIMIZATION);
 		}
 	}
 
@@ -119,7 +121,8 @@ class Tool {
 		if (tooMuchInlineStyles) {
 			result.addRecommendation(
 				"Move inline styles to CSS files to reduce your page's size by %percentage%%.",
-				{ "%percentage%": Math.round(lengthPercentage * 100, 2) / 100 }
+				{ "%percentage%": Math.round(lengthPercentage * 100, 2) / 100 },
+				priorities.OPTIMIZATION
 			);
 		}
 	}
@@ -133,7 +136,7 @@ class Tool {
 			.addSnippets(this._data.altlessImgs);
 
 		if (this._data.altlessImgs.length) {
-			result.addRecommendation("Add an alt attribute to all of your `<img>` tags to describe their contents.");
+			result.addRecommendation("Add an alt attribute to all of your `<img>` tags to describe their contents.", {}, priorities.ISSUE);
 		}
 	}
 
@@ -146,7 +149,7 @@ class Tool {
 			.addSnippets(this._data.deprecatedTags);
 
 		if (this._data.deprecatedTags.length) {
-			result.addRecommendation("Remove or replace the deprecated HTML tags on your page.");
+			result.addRecommendation("Remove or replace the deprecated HTML tags on your page.", {}, priorities.OPTIMIZATION);
 		}
 	}
 
@@ -167,7 +170,7 @@ class Tool {
 		// Unsafe characters
 		if (this._data.urlPath.replace(/['"<>#%{}|\\^~[]`]/g, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "") != this._data.urlPath) {
 			score -= SCORE_DEDUCTION_CRUCIAL;
-			result.addRecommendation("Remove special characters from your page's URL. Your base URL should only use alphanumeric characters without accents, dashes and hyphens.");
+			result.addRecommendation("Remove special characters from your page's URL. Your base URL should only use alphanumeric characters without accents, dashes and hyphens.", {}, priorities.ISSUE);
 		}
 
 		// Numeric parts
@@ -175,34 +178,34 @@ class Tool {
               this._data.urlPath.replace(/\D/g, "").length / this._data.urlPath.length > .3 ||
               /\.[a-z0-9]{2,5}$/.test(this._data.urlPath) && this._data.urlQuery.replace(/\D/g, "").length > 0) {
 			score -= SCORE_DEDUCTION_CRUCIAL;
-			result.addRecommendation("Change your URL format to word-based slugs instead of numerical identifiers.");
+			result.addRecommendation("Change your URL format to word-based slugs instead of numerical identifiers.", {}, priorities.ESSENTIAL);
 		}
 
 		// URL length
 		if (pageUrl.length > 70) {
 			score -= SCORE_DEDUCTION_MINOR;
-			result.addRecommendation("Update your page's URL to be 50-60 characters long.");
+			result.addRecommendation("Update your page's URL to be 50-60 characters long.", {}, priorities.ESSENTIAL);
 		} else if (pageUrl.length > 60) {
 			score -= SCORE_DEDUCTION_CONSIDER;
-			result.addRecommendation("Consider updating your page's URL to be 50-60 characters long.");
+			result.addRecommendation("Consider updating your page's URL to be 50-60 characters long.", {}, priorities.OPTIMIZATION);
 		}
 
 		// URL "folders" (2 max)
 		if (pathParts.length > 3) {
 			score -= SCORE_DEDUCTION_MINOR;
-			result.addRecommendation("Reduce the amount of \"folders\" in your page's URL. Use at most 2 folders in your URLs for improved readability.");
+			result.addRecommendation("Reduce the amount of \"folders\" in your page's URL. Use at most 2 folders in your URLs for improved readability.", {}, priorities.OPTIMIZATION);
 		}
 
 		// Uppercase characters
 		if (this._data.urlPath.replace(/[A-Z]/g, "") != this._data.urlPath) {
 			score -= SCORE_DEDUCTION_MINOR;
-			result.addRecommendation("Replace uppercase characters in your page's URL by lowercase ones.");
+			result.addRecommendation("Replace uppercase characters in your page's URL by lowercase ones.", {}, priorities.OPTIMIZATION);
 		}
 
 		// Hyphens > underscores
 		if (this._data.urlPath.replace(/_/g, "") != this._data.urlPath) {
 			score -= SCORE_DEDUCTION_MINOR;
-			result.addRecommendation("Replace underscores in your page's URL by hyphens. Hyphens are the Google-preferred standard for URLs.");
+			result.addRecommendation("Replace underscores in your page's URL by hyphens. Hyphens are the Google-preferred standard for URLs.", {}, priorities.OPTIMIZATION);
 		}
 
 		result.setScore(Math.max(0, score));
@@ -230,7 +233,7 @@ class Tool {
 			.addSnippets(hasSslCertificate ? [`Your website has a valid SSL certificate provided by ${certificateIssuer}. It is valid until ${certificateExpirationDate}.`] : []);
 
 		if (!hasSslCertificate) {
-			result.addRecommendation("Set up an SSL certificate for your website and update your pages to use the https protocol.");
+			result.addRecommendation("Set up an SSL certificate for your website and update your pages to use the `https` protocol.", {}, priorities.ISSUE);
 		}
 	}
 
